@@ -1,6 +1,6 @@
 from werkzeug.local import LocalProxy
 
-from .statsd.stats_client import StatsClient
+from .statsd import StatsClient
 
 
 class ObjectWrapper(object):
@@ -16,4 +16,5 @@ class ObjectWrapper(object):
 
 
 statsd_wrapper = ObjectWrapper()
+statsd_wrapper.set_target(StatsClient(host='statsd', port=8126))
 statsd = statsd_wrapper()
